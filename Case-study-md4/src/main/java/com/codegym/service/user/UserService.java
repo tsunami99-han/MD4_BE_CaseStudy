@@ -37,7 +37,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> userOptional = userRepository.findByUsername(username);
+        Optional<User> userOptional = userRepository.findAllByUsernameContaining(username);
         if (!userOptional.isPresent()) {
             throw new UsernameNotFoundException(username);
         }
@@ -50,7 +50,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public Optional<User> findAllByUserNameContaining(String username) {
+        return userRepository.findAllByUsernameContaining(username);
     }
 }
