@@ -32,4 +32,9 @@ public class PostService implements IPostService{
     public void remove(Long id) {
         postRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Post> findAllByAccountContaining(String name) {
+        return postRepository.findAllByAccountContaining(name);
+    }
 }
