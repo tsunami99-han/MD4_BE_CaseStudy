@@ -18,6 +18,12 @@ public class RelationshipService implements IRelationshipService {
         return relationshipRepository.findFriendById(id);
     }
 
+
+    @Override
+    public List<Relationship> findRelationshipsByUserAndUserFriend(Long id1, Long id2) {
+        return relationshipRepository.findRelationshipsByUserAndUserFriend(id1, id2);
+    }
+
     @Override
     public Iterable<Relationship> findAll() {
         return relationshipRepository.findAll();

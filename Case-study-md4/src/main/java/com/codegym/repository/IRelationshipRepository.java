@@ -11,4 +11,6 @@ import java.util.List;
 public interface IRelationshipRepository extends PagingAndSortingRepository<Relationship,Long>{
     @Query("select r from Relationship r where r.name = 'friend' and r.user.id =:id")
     List<Relationship> findFriendById(Long id);
+
+    List<Relationship> findRelationshipsByUserAndUserFriend(Long id1, Long id2);
 }

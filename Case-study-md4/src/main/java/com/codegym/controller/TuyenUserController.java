@@ -1,14 +1,21 @@
 package com.codegym.controller;
 
+import com.codegym.model.JwtResponse;
 import com.codegym.model.Role;
 import com.codegym.model.User;
 import com.codegym.model.VerificationToken;
+import com.codegym.service.jwt.JwtService;
 import com.codegym.service.role.IRoleService;
 import com.codegym.service.user.IUserService;
 import com.codegym.service.verificationTokenService.IVerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +36,12 @@ public class TuyenUserController {
 
     @Autowired
     private IRoleService roleService;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
 
     @Autowired
@@ -66,6 +79,21 @@ public class TuyenUserController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(userService.findById(id).get(), HttpStatus.OK);
+    }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User user) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtService.generateTokenLogin(authentication);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userService.findAllByUserNameContaining(user.getUsername()).get();
+        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getFullName(), userDetails.getAuthorities()));
+    }
+    @GetMapping("/hello")
+    public ResponseEntity<String> hello() {
+        return new ResponseEntity<>("Hello World", HttpStatus.OK);
     }
 }
