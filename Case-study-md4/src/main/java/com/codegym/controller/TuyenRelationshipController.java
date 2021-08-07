@@ -40,7 +40,7 @@ public class TuyenRelationshipController {
         List<User> users = getUser(id);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
-    // Tìm bạn chung
+    // Tìm list bạn chung
     @GetMapping("/search/{id1}/{id2}")
     public ResponseEntity<List<User>>findMutualFriends(@PathVariable Long id1, @PathVariable Long id2){
         List<User> users = new ArrayList<>();
