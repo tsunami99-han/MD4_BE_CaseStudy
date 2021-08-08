@@ -65,7 +65,7 @@ public class TuyenUserController {
         VerificationToken token = new VerificationToken(user);
         token.setExpiryDate(10);
         verificationTokenService.save(token);
-        User user1 = userService.findAllByUserNameContaining(user.getUsername()).get();
+        User user1 = userService.findByUsername(user.getUsername()).get();
         return new ResponseEntity<>(user1, HttpStatus.CREATED);
     }
     @GetMapping("")
@@ -89,7 +89,7 @@ public class TuyenUserController {
 
         String jwt = jwtService.generateTokenLogin(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User currentUser = userService.findAllByUserNameContaining(user.getUsername()).get();
+        User currentUser = userService.findByUsername(user.getUsername()).get();
         return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getFullName(), userDetails.getAuthorities()));
     }
     @GetMapping("/hello")

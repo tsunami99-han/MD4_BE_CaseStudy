@@ -26,8 +26,8 @@ public class TuyenPostController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Iterable<Post>> searchByAccount(@RequestParam String name){
-        Iterable<Post> posts = postService.findAllByAccountContaining("%"+name+"%");
+    public ResponseEntity<Iterable<Post>> searchByAccount(@RequestParam String content){
+        Iterable<Post> posts = postService.findAllByContentContaining("%"+content+"%");
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 

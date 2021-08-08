@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPostRepository extends JpaRepository<Post,Long> {
-    @Query("select p from Post p inner join p.account u where u.fullName like ?1")
-    Iterable<Post> findAllByAccountContaining(@Param("name") String name);
+//    @Query("select p from Post p inner join p.account u where u.fullName like ?1")
+    Iterable<Post> findAllByContentContaining(String content);
 }
 
