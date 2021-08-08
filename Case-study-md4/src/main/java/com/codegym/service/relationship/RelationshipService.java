@@ -25,6 +25,12 @@ public class RelationshipService implements IRelationshipService {
     }
 
     @Override
+    public void unFriend(Long id1, Long id2) {
+        relationshipRepository.unFriend(id1, id2);
+    }
+
+
+    @Override
     public Iterable<Relationship> findAll() {
         return relationshipRepository.findAll();
     }

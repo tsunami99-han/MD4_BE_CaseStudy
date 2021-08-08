@@ -3,6 +3,7 @@ package com.codegym.repository;
 import com.codegym.model.Relationship;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,6 +19,6 @@ public interface IRelationshipRepository extends PagingAndSortingRepository<Rela
     List<Relationship> findRelationshipsByUserAndUserFriend(Long id1, Long id2);
 
     // Hủy kết bạn
-
-
+    @Query(value = "delete from relationship where user_id = ?1 and user_friend_id = ?2", nativeQuery = true)
+    void unFriend(Long id1, Long id2);
 }

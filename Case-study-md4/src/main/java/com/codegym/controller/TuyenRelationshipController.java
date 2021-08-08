@@ -33,7 +33,6 @@ public class TuyenRelationshipController {
 //        return new ResponseEntity<>(users, HttpStatus.OK);
 //    }
 
-
     // Tìm list bạn bè
     @GetMapping("/{id}")
     public ResponseEntity<List<User>> findAllFriend(@PathVariable Long id){
@@ -65,9 +64,7 @@ public class TuyenRelationshipController {
 //        }
 //        return new ResponseEntity<>(users, HttpStatus.OK);
 //    }
-
-
-
+    // Lấy ra đối tượng user từ relationship
     public List<User> getUser(Long id){
         Iterable<Relationship> relationships = relationshipService.findFriendById(id);
         List<User> users = new ArrayList<>();
@@ -78,5 +75,11 @@ public class TuyenRelationshipController {
         return users;
     }
 
+    // Hủy kết bạn
+    @GetMapping("/delete/{id1}/{id2}")
+    public ResponseEntity<Relationship> unFriend(@PathVariable Long id1, @PathVariable Long id2){
+        relationshipService.unFriend(id1, id2);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
