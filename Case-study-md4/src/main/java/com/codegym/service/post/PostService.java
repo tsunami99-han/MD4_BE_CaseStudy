@@ -38,4 +38,9 @@ public class PostService implements IPostService{
     public Iterable<Post> findAllByContentContaining(String content) {
         return postRepository.findAllByContentContaining(content);
     }
+
+    @Override
+    public Iterable<Post> findAllByAccountId(Long id) {
+        return postRepository.findAllByAccountId(id);
+    }
 }

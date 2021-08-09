@@ -1,6 +1,7 @@
 package com.codegym.service.verificationTokenService;
 
 import com.codegym.model.VerificationToken;
+import com.codegym.repository.IVerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class VerificationTokenServiceImpl implements IVerificationTokenService {
 
     @Autowired
-    private IVerificationTokenService verificationTokenRepository;
+    private IVerificationTokenRepository verificationTokenRepository;
 
     @Override
     public VerificationToken findByToken(String token) {

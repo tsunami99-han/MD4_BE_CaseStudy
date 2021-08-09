@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface IPostService extends IGeneralService<Post> {
 
     Iterable<Post> findAllByContentContaining(String content);
+
+    Iterable<Post> findAllByAccountId(Long id);
 }

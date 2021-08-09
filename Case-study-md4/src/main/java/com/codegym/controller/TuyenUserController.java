@@ -73,6 +73,7 @@ public class TuyenUserController {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
+    // Xem trang cá nhân
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id){
         if (!userService.findById(id).isPresent()){
@@ -80,6 +81,8 @@ public class TuyenUserController {
         }
         return new ResponseEntity<>(userService.findById(id).get(), HttpStatus.OK);
     }
+
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
