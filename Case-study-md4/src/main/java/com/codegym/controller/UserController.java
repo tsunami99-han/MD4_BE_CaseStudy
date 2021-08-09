@@ -17,10 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @CrossOrigin("*")
@@ -142,6 +139,10 @@ public class UserController {
     //block người dùng
     @PostMapping("/users/block")
     public ResponseEntity<Void> blockUser(@RequestBody Relationship relationship){
+        Optional<Relationship> relationship1=relationshipService.findByNameAndUserAndUserFriend("Friend",relationship.getUser().getId(),relationship.getUserFriend().getId());
+        if (relationship1.isPresent()){
+            relationshipService.remove(relationship1.get().getId());
+        }
         relationshipService.save(relationship);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -151,5 +152,24 @@ public class UserController {
         relationshipService.remove(id);
         return new ResponseEntity(HttpStatus.OK);
     }
-
+    // danh sách bạn bè của mình
+    @GetMapping("/users/friend/{id}")
+    public ResponseEntity<List<User>> findFriendById(@PathVariable("id") Long id){
+        List<Relationship> list=relationshipService.findFriendById(id);
+        return new ResponseEntity(list,HttpStatus.OK);
+    }
+//    @GetMapping("/users/mutualfiend/{id1}/{id2}")
+//    public ResponseEntity<List<User>>findMutualFriends(@PathVariable Long id1, @PathVariable Long id2){
+//        List<User> users = new ArrayList<>();
+//        List<Relationship> usersId1 = relationshipService.findFriendById(id1);
+//        List<Relationship> usersId2 = relationshipService.findFriendById(id2);
+//        for (User user1:usersId1) {
+//            for (User user2:usersId2) {
+//                if (user1.getId()==user2.getId()){
+//                    users.add(user1);
+//                }
+//            }
+//        }
+//        return new ResponseEntity<>(users, HttpStatus.OK);
+//    }
 }

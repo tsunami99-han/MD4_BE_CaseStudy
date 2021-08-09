@@ -18,21 +18,14 @@ public class RelationshipService implements IRelationshipService {
         return relationshipRepository.findFriendById(id);
     }
 
-
     @Override
-    public List<Relationship> findRelationshipsByUserAndUserFriend(Long id1, Long id2) {
-        return relationshipRepository.findRelationshipsByUserAndUserFriend(id1, id2);
+    public Optional<Relationship> findByNameAndUserAndUserFriend(String name, Long id_User, Long id_UserFriend) {
+        return relationshipRepository.findByNameAndUserAndUserFriend(name,id_User,id_UserFriend);
     }
-
-    @Override
-    public void unFriend(Long id1, Long id2) {
-        relationshipRepository.unFriend(id1, id2);
-    }
-
 
     @Override
     public Iterable<Relationship> findAll() {
-        return relationshipRepository.findAll();
+        return null;
     }
 
     @Override

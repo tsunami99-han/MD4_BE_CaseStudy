@@ -6,16 +6,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IRelationshipService extends IGeneralService<Relationship> {
 
     // Tìm danh sách bạn bè
     List<Relationship> findFriendById(Long id);
 
+//    @Query()
+//    Iterable<Relationship> findMutualFriend(Long id1,Long id2);
+    Optional<Relationship> findByNameAndUserAndUserFriend(String name,Long id_User,Long id_UserFriend);
 
-    // Tìm bạn chung
-    List<Relationship> findRelationshipsByUserAndUserFriend(Long id1, Long id2);
 
-    // Hủy kết bạn,
-    void unFriend(Long id1, Long id2);
+
 }
