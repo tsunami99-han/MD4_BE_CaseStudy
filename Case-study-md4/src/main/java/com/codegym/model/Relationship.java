@@ -9,7 +9,9 @@ public class Relationship {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate time;
+
     private String name;
+
     @ManyToOne
     private User user;
     @ManyToOne

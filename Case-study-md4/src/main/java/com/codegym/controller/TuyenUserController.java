@@ -43,10 +43,10 @@ public class TuyenUserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
     @Autowired
     private IVerificationTokenService verificationTokenService;
 
+    //Sigup
     @PostMapping("/register")
     public ResponseEntity<User> create(@RequestBody User user){
         Iterable<User> users = userService.findAll();
@@ -55,11 +55,10 @@ public class TuyenUserController {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
         }
-
-        Optional<Role> role = roleService.findByName("ROLE_USER");
-        Set<Role> roles = new HashSet<>();
-        roles.add(role.get());
-        user.setRoleSet(roles);
+//        Optional<Role> role = roleService.findByName("ROLE_USER");
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(role.get());
+//        user.setRoleSet(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
         VerificationToken token = new VerificationToken(user);
@@ -68,6 +67,8 @@ public class TuyenUserController {
         User user1 = userService.findByUsername(user.getUsername()).get();
         return new ResponseEntity<>(user1, HttpStatus.CREATED);
     }
+
+    //  hiển thị list user
     @GetMapping("")
     public ResponseEntity<Iterable<User>> findAll(){
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
@@ -80,6 +81,7 @@ public class TuyenUserController {
         }
         return new ResponseEntity<>(userService.findById(id).get(), HttpStatus.OK);
     }
+    //login
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
@@ -92,6 +94,7 @@ public class TuyenUserController {
         User currentUser = userService.findByUsername(user.getUsername()).get();
         return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getFullName(), userDetails.getAuthorities()));
     }
+
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
         return new ResponseEntity<>("Hello World", HttpStatus.OK);
