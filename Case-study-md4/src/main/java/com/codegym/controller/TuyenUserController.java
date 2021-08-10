@@ -74,6 +74,7 @@ public class TuyenUserController {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
+    // Xem trang cá nhân
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id){
         if (!userService.findById(id).isPresent()){
@@ -81,7 +82,8 @@ public class TuyenUserController {
         }
         return new ResponseEntity<>(userService.findById(id).get(), HttpStatus.OK);
     }
-    //login
+
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
@@ -94,7 +96,6 @@ public class TuyenUserController {
         User currentUser = userService.findByUsername(user.getUsername()).get();
         return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getFullName(), userDetails.getAuthorities()));
     }
-
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
         return new ResponseEntity<>("Hello World", HttpStatus.OK);

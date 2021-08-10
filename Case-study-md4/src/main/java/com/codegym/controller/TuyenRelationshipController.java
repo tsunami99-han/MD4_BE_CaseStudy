@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -64,6 +65,7 @@ public class TuyenRelationshipController {
 //        }
 //        return new ResponseEntity<>(users, HttpStatus.OK);
 //    }
+
     // Lấy ra đối tượng user từ relationship
     public List<User> getUser(Long id){
         Iterable<Relationship> relationships = relationshipService.findFriendById(id);
@@ -80,6 +82,12 @@ public class TuyenRelationshipController {
     public ResponseEntity<Relationship> unFriend(@PathVariable Long id1, @PathVariable Long id2){
         relationshipService.unFriend(id1, id2);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Optional<Relationship>> saveNew(@RequestBody Relationship relationship){
+        relationshipService.save(relationship);
+        return new ResponseEntity<>(relationshipService.findById(relationship.getId()), HttpStatus.CREATED);
     }
 
 }
