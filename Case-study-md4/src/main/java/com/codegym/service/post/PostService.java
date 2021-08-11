@@ -5,6 +5,7 @@ import com.codegym.repository.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 
@@ -43,4 +44,11 @@ public class PostService implements IPostService{
     public Iterable<Post> findAllByAccountId(Long id) {
         return postRepository.findAllByAccountId(id);
     }
+
+    @Override
+    public Iterable<Post> findByUserAndTime(Long id, LocalDateTime time) {
+        return postRepository.findByPost(id,time);
+    }
+
+
 }

@@ -10,10 +10,16 @@ public class ImagePost {
     private Long id;
 
     private String image;
+    
     @ManyToOne
     private Post post;
 
     public ImagePost() {
+    }
+
+    public ImagePost(String image, Post post) {
+        this.image = image;
+        this.post = post;
     }
 
     public Long getId() {

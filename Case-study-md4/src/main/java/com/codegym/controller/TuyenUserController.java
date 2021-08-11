@@ -55,10 +55,10 @@ public class TuyenUserController {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
         }
-//        Optional<Role> role = roleService.findByName("ROLE_USER");
-//        Set<Role> roles = new HashSet<>();
-//        roles.add(role.get());
-//        user.setRoleSet(roles);
+        Optional<Role> role = roleService.findByName("ROLE_USER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(role.get());
+        user.setRoleSet(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
         VerificationToken token = new VerificationToken(user);
@@ -88,9 +88,7 @@ public class TuyenUserController {
     public ResponseEntity<?> login(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         String jwt = jwtService.generateTokenLogin(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userService.findByUsername(user.getUsername()).get();

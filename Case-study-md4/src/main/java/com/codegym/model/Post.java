@@ -15,12 +15,9 @@ public class Post {
     private LocalDateTime time;
 
     @ManyToOne
-    private User account;
+    private User user;
 
     private String status;
-
-    private long likeQuantity=0;
-    private long commentQuantity=0;
 
     public Post() {
     }
@@ -57,27 +54,12 @@ public class Post {
         this.time = time;
     }
 
-    public User getAccount() {
-        return account;
+    public User getUser() {
+        return user;
     }
 
-    public void setAccount(User account) {
-        this.account = account;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public long getLikeQuantity() {
-        return likeQuantity;
-    }
-
-    public void setLikeQuantity(long likeQuantity) {
-        this.likeQuantity = likeQuantity;
-    }
-
-    public long getCommentQuantity() {
-        return commentQuantity;
-    }
-
-    public void setCommentQuantity(long commentQuantity) {
-        this.commentQuantity = commentQuantity;
-    }
 }
