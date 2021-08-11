@@ -10,10 +10,15 @@ public class ImagePost {
     private Long id;
 
     private String image;
-    @ManyToOne
-    private Post post;
+
+    private Long postId;
 
     public ImagePost() {
+    }
+
+    public ImagePost(String image, Long postId) {
+        this.image = image;
+        this.postId = postId;
     }
 
     public Long getId() {
@@ -32,11 +37,20 @@ public class ImagePost {
         this.image = image;
     }
 
-    public Post getPost() {
-        return post;
+    public Long getPostId() {
+        return postId;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
+    @Override
+    public String toString() {
+        return "ImagePost{" +
+                "id=" + id +
+                ", image='" + image + '\'' +
+                ", postId=" + postId +
+                '}';
     }
 }

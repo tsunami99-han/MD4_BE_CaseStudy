@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
-public class ThaoController {
+public class ThaoUserController {
     @Autowired
     private IUserService userService;
 
