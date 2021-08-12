@@ -12,5 +12,5 @@ public interface IPostService extends IGeneralService<Post> {
 
     Iterable<Post> findAllByAccountId(Long id);
 
-    Iterable<Post> findByUserAndTime(Long id, LocalDateTime time);
+
 }

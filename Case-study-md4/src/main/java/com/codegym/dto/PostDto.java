@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Setter
 public class PostDto {
     private String content;
-//    private LocalDateTime time;
     private Long userId;
 
     private String status;

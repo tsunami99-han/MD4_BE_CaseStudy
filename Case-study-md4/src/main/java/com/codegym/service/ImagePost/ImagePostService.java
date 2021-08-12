@@ -15,12 +15,12 @@ public class ImagePostService implements IImagePost{
 
     @Override
     public Iterable<ImagePost> findAll() {
-        return null;
+        return imageRepository.findAll();
     }
 
     @Override
     public Optional<ImagePost> findById(Long id) {
-        return Optional.empty();
+        return imageRepository.findById(id);
     }
 
     @Override
@@ -30,6 +30,6 @@ public class ImagePostService implements IImagePost{
 
     @Override
     public void remove(Long id) {
-
+        imageRepository.deleteById(id);
     }
 }

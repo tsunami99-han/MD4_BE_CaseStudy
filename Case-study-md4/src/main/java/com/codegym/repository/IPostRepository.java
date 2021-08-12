@@ -23,5 +23,6 @@ public interface IPostRepository extends JpaRepository<Post,Long> {
 
     @Query("select p from Post p where p.user.id = ?1 and p.time = ?2")
     Iterable<Post> findByPost(Long userId, LocalDateTime time);
+
 }
 

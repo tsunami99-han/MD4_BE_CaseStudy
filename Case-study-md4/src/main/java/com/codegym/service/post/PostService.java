@@ -45,10 +45,6 @@ public class PostService implements IPostService{
         return postRepository.findAllByAccountId(id);
     }
 
-    @Override
-    public Iterable<Post> findByUserAndTime(Long id, LocalDateTime time) {
-        return postRepository.findByPost(id,time);
-    }
 
 
 }

@@ -33,6 +33,9 @@ public class ControllerRela_LUC {
     @Autowired
     private IPostService postService;
 
+
+
+
     @Autowired
     private IUserService userService;
 
@@ -60,6 +63,11 @@ public class ControllerRela_LUC {
     @GetMapping("/findAllPost")
     public ResponseEntity<Iterable<Post>> findAll(){
         Iterable<Post> findAll= postService.findAll();
+        return new ResponseEntity<>(findAll,HttpStatus.OK);
+    }
+    @GetMapping("/findAllImage")
+    public ResponseEntity<Iterable<ImagePost>> findAllImage(){
+        Iterable<ImagePost> findAll= iImagePost.findAll();
         return new ResponseEntity<>(findAll,HttpStatus.OK);
     }
 
@@ -98,6 +106,7 @@ public class ControllerRela_LUC {
         iImagePost.save(imagePost);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
 
 
