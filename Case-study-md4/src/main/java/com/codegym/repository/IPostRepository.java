@@ -16,7 +16,7 @@ public interface IPostRepository extends JpaRepository<Post,Long> {
     Iterable<Post> findAllByContentContaining(String content);
 
     // Tìm post theo id account
-    @Query("select p from Post p where p.account.id =:id")
-    Iterable<Post> findAllByAccountId(Long id);
+    @Query("select p from Post p where p.user.id =:id")
+    Iterable<Post> findAllByUserId(Long id);
 }
 

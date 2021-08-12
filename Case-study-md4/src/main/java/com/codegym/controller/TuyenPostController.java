@@ -27,8 +27,8 @@ public class TuyenPostController {
 
     // Tìm post theo Id Account
     @GetMapping("/user/{id}")
-    public ResponseEntity<Iterable<Post>> findByAccountId(@PathVariable Long id){
-        Iterable<Post> posts = postService.findAllByAccountId(id);
+    public ResponseEntity<Iterable<Post>> findByUserId(@PathVariable Long id){
+        Iterable<Post> posts = postService.findAllByUserId(id);
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
@@ -42,4 +42,6 @@ public class TuyenPostController {
     public ResponseEntity<Iterable<Post>> findAll(){
         return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
     }
+
+
 }

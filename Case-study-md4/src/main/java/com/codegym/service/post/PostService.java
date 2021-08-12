@@ -40,7 +40,7 @@ public class PostService implements IPostService{
     }
 
     @Override
-    public Iterable<Post> findAllByAccountId(Long id) {
-        return postRepository.findAllByAccountId(id);
+    public Iterable<Post> findAllByUserId(Long id) {
+        return postRepository.findAllByUserId(id);
     }
 }

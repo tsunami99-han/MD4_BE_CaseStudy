@@ -99,4 +99,50 @@ public class TuyenUserController {
     public ResponseEntity<String> hello() {
         return new ResponseEntity<>("Hello World", HttpStatus.OK);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
+        System.out.println(user);
+        Optional<User> userOptional = userService.findById(id);
+        if (!userOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        if (user.getUsername()==null){
+            user.setUsername(userOptional.get().getUsername());
+        }
+        if (user.getPassword()==null){
+            user.setPassword(userOptional.get().getPassword());
+        }
+        if (user.getRoleSet()==null){
+            user.setRoleSet(userOptional.get().getRoleSet());
+        }
+        if (user.getFullName()==null){
+            user.setFullName(userOptional.get().getFullName());
+        }
+        if (user.getDateOfBirth()==null){
+            user.setDateOfBirth(userOptional.get().getDateOfBirth());
+        }
+        if (user.getGender()==null){
+            user.setGender(userOptional.get().getGender());
+        }
+        if (user.getAvatar()==null){
+            user.setAvatar(userOptional.get().getAvatar());
+        }
+        if (user.getBackground()==null){
+            user.setBackground(userOptional.get().getBackground());
+        }
+        if (user.getAddress()==null){
+            user.setAddress(userOptional.get().getAddress());
+        }
+        if (user.getDescription()==null){
+            user.setDescription(userOptional.get().getDescription());
+        }
+        if (user.getPhoneNumber()==null){
+            user.setPhoneNumber(userOptional.get().getPhoneNumber());
+        }
+        user.setId(id);
+        userService.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
 }

@@ -15,7 +15,7 @@ public class Post {
     private LocalDateTime time;
 
     @ManyToOne
-    private User account;
+    private User user;
 
     private String status;
 
@@ -57,12 +57,12 @@ public class Post {
         this.time = time;
     }
 
-    public User getAccount() {
-        return account;
+    public User getUser() {
+        return user;
     }
 
-    public void setAccount(User account) {
-        this.account = account;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getLikeQuantity() {
