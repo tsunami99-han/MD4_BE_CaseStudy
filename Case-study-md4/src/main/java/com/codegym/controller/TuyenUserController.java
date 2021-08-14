@@ -28,6 +28,8 @@ import java.util.Set;
 @RequestMapping("/users")
 @CrossOrigin("*")
 public class TuyenUserController {
+    private String uploadPath = "C:\\Users\\Admin-Thính\\Desktop\\FE\\MD4_FE_CaseStudy\\Case-study-md4-wt\\image";
+
     @Autowired
     private IUserService userService;
 
@@ -43,9 +45,11 @@ public class TuyenUserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
     @Autowired
     private IVerificationTokenService verificationTokenService;
+
+
+
 
     @PostMapping("/register")
     public ResponseEntity<User> create(@RequestBody User user){

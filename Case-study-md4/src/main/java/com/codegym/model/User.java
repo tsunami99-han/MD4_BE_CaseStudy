@@ -21,9 +21,11 @@ public class User {
 
     private String gender;
 
-    private String avatar;
+    @OneToOne
+    private ImagePost avatar;
 
-    private String background;
+    @OneToOne
+    private ImagePost background;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roleSet;
@@ -87,19 +89,19 @@ public class User {
         this.gender = gender;
     }
 
-    public String getAvatar() {
+    public ImagePost getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(ImagePost avatar) {
         this.avatar = avatar;
     }
 
-    public String getBackground() {
+    public ImagePost getBackground() {
         return background;
     }
 
-    public void setBackground(String background) {
+    public void setBackground(ImagePost background) {
         this.background = background;
     }
 

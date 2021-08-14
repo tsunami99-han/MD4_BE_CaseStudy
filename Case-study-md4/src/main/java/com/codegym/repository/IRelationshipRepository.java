@@ -15,12 +15,6 @@ public interface IRelationshipRepository extends PagingAndSortingRepository<Rela
     @Query("select r from Relationship r where r.name = 'friend' and r.user.id =:id")
     List<Relationship> findFriendById(Long id);
 
-//    @Query("select r from Relationship r where r.name = 'friend' and r.user.id =:id1 and r in select r from Relationship r where r.name = 'friend' and r.user.id =:id2)
-//    List<Relationship> findFriendById2(Long id1, Long id2);
-
-
-
-
 
     // Lấy danh sách bạn chung
     List<Relationship> findRelationshipsByUserAndUserFriend(Long id1, Long id2);
